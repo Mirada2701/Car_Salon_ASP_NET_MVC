@@ -1,21 +1,18 @@
+using Car_Salon_App.Data;
 using Car_Salon_App.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Car_Salon_App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+		private CarSalonDbContext context = new();
+		public IActionResult Index()
         {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
+			var cars = context.Cars.Include(c => c.Brand).Include(c => c.Category).ToList();
+			return View(cars);
         }
 
         public IActionResult Privacy()

@@ -1,6 +1,7 @@
 ﻿using Car_Salon_App.Data;
 using Car_Salon_App.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Car_Salon_App.Controllers
@@ -16,6 +17,25 @@ namespace Car_Salon_App.Controllers
         {
             var cars = context.Cars.Include(c => c.Brand).Include(c => c.Category).ToList();
             return View(cars);
+        }
+        public IActionResult Create()
+        {
+            SetSelectItems();
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Car car)
+        {
+            if (!ModelState.IsValid)
+            {
+                SetSelectItems();
+                return View(car);
+            }
+
+            context.Cars.Add(car);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)
         {
@@ -33,9 +53,14 @@ namespace Car_Salon_App.Controllers
             var car = context.Cars.Include(c => c.Brand).Include(c => c.Category).FirstOrDefault(c => c.Id == id);
 
             if (car == null)
-                return NotFound(); //404            
+                return NotFound();           
 
             return View(car);
+        }
+        private void SetSelectItems()
+        {
+            ViewBag.Categories = new SelectList(context.Categories.ToList(), "Id", "Name");
+            ViewBag.Brands = new SelectList(context.Brands.ToList(), "Id", "Name");
         }
     }
 }

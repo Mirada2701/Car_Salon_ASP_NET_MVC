@@ -1,7 +1,11 @@
-﻿@using Car_Salon_App.Entities
-@model List<Car>
+﻿@model List<Car>
 
  <h1>Cars List</h1>
+
+<a asp-action="Create" class="mb-3 btn btn-primary">
+    <i class="bi bi-plus-circle-fill"></i>
+    Add New Car
+</a>
 
 <table class="table table-striped-columns">
     <thead>
@@ -20,7 +24,7 @@
     <tbody>
         @foreach (var i in Model)
         {
-            <tr>
+            <tr class="align-middle">
                 <th scope="row">@i.Id</th>
                 <td>@i.Brand</td>
                 <td>@i.Model</td>
@@ -41,7 +45,7 @@
 				<td>
                     @if (i.Quantity > 0)
                     {
-                        <span class="badge bg-primary">Available</span>
+                        <span class="badge bg-success">Available</span>
                     }
                     else
                     {

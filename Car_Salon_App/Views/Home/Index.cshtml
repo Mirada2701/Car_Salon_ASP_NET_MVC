@@ -1,8 +1,46 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<Car>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+
+<div class="row row-cols-3 g-4">
+	@foreach (var i in Model)
+	{
+		<div class="col">
+			<div class="card" style="width: 18rem;">
+				<img src="@i.ImageUrl" class="card-img-top">
+				<div class="card-body">
+					<h5 class="card-title">@i.Brand @i.Model</h5>
+					<p class="card-text">@i.Description</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Category: @i.Category</li>
+					<li class="list-group-item">Engine: @i.Engine</li>
+					<li class="list-group-item">Year: @i.Year</li>
+					<li class="list-group-item">
+						@if (i.Discount > 0)
+						{
+							<span>@(i.Price - (i.Price / 100 * i.Discount))$</span>
+							<del>@i.Price$</del>
+						}
+						else
+						{
+							<span>@i.Price$</span>
+						}
+					</li>
+					<li class="list-group-item">
+						@if (i.Quantity > 0)
+						{
+							<span class="badge bg-success">Available</span>
+						}
+						else
+						{
+							<span class="badge bg-danger">Ended</span>
+						}
+					</li>
+				</ul>
+			</div>
+		</div>
+	}
+	
 </div>
