@@ -1,4 +1,4 @@
-﻿
+﻿@using Car_Salon_App.Entities
 @model List<Car>
 
  <h1>Cars List</h1>
@@ -10,9 +10,11 @@
             <th scope="col">Brand</th>
             <th scope="col">Model</th>
             <th scope="col">Engine</th>
+            <th scope="col">Category</th>
             <th scope="col">Year</th>
             <th scope="col">Price</th>
             <th scope="col">Availability</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -23,12 +25,13 @@
                 <td>@i.Brand</td>
                 <td>@i.Model</td>
                 <td>@i.Engine</td>
+                <td>@i.Category</td>
                 <td>@i.Year.ToShortDateString()</td>
                 <td>
                     @if(i.Discount > 0)
 					{
-						<del>@i.Price$</del>
                         <span>@(i.Price - (i.Price / 100 * i.Discount))$</span>
+						<del>@i.Price$</del>
                     }
                     else
                     {
@@ -44,6 +47,14 @@
                     {
                         <span class="badge bg-danger">Ended</span>
                     }
+                </td>
+                <td>
+					<a class="btn btn-outline-danger" asp-controller="Cars" asp-action="Delete" asp-route-id="@i.Id">
+						<i class="bi bi-trash3"></i>
+					</a>
+                    <a class="btn btn-outline-secondary" asp-controller="Cars" asp-action="Info" asp-route-id="@i.Id">
+                        <i class="bi bi-info-circle-fill"></i>
+                    </a>
                 </td>
             </tr>
         }
