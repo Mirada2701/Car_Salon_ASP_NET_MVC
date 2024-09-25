@@ -37,6 +37,29 @@ namespace Car_Salon_App.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult Edit(int id)
+        {
+            var car = context.Cars.Find(id);
+
+            if (car == null) return NotFound();
+
+            SetSelectItems();
+            return View(car);
+        }
+        [HttpPost]
+        public IActionResult Edit(Car car)
+        {
+            if (!ModelState.IsValid)
+            {
+                SetSelectItems();
+                return View(car);
+            }
+
+            context.Cars.Update(car);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
         public IActionResult Delete(int id)
         {
             var car = context.Cars.Find(id);

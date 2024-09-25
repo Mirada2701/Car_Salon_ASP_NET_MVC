@@ -53,6 +53,9 @@
                     }
                 </td>
                 <td>
+                    <a class="btn btn-outline-warning" asp-controller="Cars" asp-action="Edit" asp-route-id="@i.Id">
+                        <i class="bi bi-pencil"></i>
+                    </a>
 					<a class="btn btn-outline-danger" asp-controller="Cars" asp-action="Delete" asp-route-id="@i.Id">
 						<i class="bi bi-trash3"></i>
 					</a>
