@@ -21,7 +21,8 @@ namespace Car_Salon_App.Controllers
         public IActionResult Create()
         {
             SetSelectItems();
-            return View();
+            ViewBag.CreateMode = true;
+            return View("Upsert");
         }
         [HttpPost]
         public IActionResult Create(Car car)
@@ -29,7 +30,8 @@ namespace Car_Salon_App.Controllers
             if (!ModelState.IsValid)
             {
                 SetSelectItems();
-                return View(car);
+                ViewBag.CreateMode = true;
+                return View("Upsert",car);
             }
 
             context.Cars.Add(car);
@@ -44,7 +46,8 @@ namespace Car_Salon_App.Controllers
             if (car == null) return NotFound();
 
             SetSelectItems();
-            return View(car);
+            ViewBag.CreateMode = false;
+            return View("Upsert",car);
         }
         [HttpPost]
         public IActionResult Edit(Car car)
@@ -52,7 +55,8 @@ namespace Car_Salon_App.Controllers
             if (!ModelState.IsValid)
             {
                 SetSelectItems();
-                return View(car);
+                ViewBag.CreateMode = true;
+                return View("Upsert",car);
             }
 
             context.Cars.Update(car);

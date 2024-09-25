@@ -7,12 +7,13 @@
     Add New Car
 </a>
 
-<table class="table table-striped-columns">
+<table class="table table-striped-columns car-table">
     <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Brand</th>
             <th scope="col">Model</th>
+            <th scope="col" class="text-center">Image</th>
             <th scope="col">Engine</th>
             <th scope="col">Category</th>
             <th scope="col">Year</th>
@@ -28,6 +29,9 @@
                 <th scope="row">@i.Id</th>
                 <td>@i.Brand</td>
                 <td>@i.Model</td>
+                <td class="text-center">
+                    <img height="40" src="@i.ImageUrl" alt="@i.Model" />
+                </td>
                 <td>@i.Engine</td>
                 <td>@i.Category</td>
                 <td>@i.Year.ToShortDateString()</td>
