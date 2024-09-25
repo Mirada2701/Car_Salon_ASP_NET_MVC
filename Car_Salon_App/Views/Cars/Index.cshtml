@@ -1,4 +1,4 @@
-﻿@model List<Car>
+﻿@model List<CarDto>
 
  <h1>Cars List</h1>
 
@@ -27,13 +27,13 @@
         {
             <tr class="align-middle">
                 <th scope="row">@i.Id</th>
-                <td>@i.Brand</td>
+                <td>@i.BrandName</td>
                 <td>@i.Model</td>
                 <td class="text-center">
                     <img height="40" src="@i.ImageUrl" alt="@i.Model" />
                 </td>
-                <td>@i.Engine</td>
-                <td>@i.Category</td>
+                <td>@i.EngineDisplay</td>
+                <td>@i.CategoryName</td>
                 <td>@i.Year.ToShortDateString()</td>
                 <td>
                     @if(i.Discount > 0)

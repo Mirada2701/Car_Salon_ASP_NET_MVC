@@ -1,3 +1,6 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
 namespace Car_Salon_App
 {
     public class Program
@@ -8,6 +11,15 @@ namespace Car_Salon_App
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // configure fluent validators
+            builder.Services.AddFluentValidationAutoValidation();
+            // enable client-side validation
+            builder.Services.AddFluentValidationClientsideAdapters();
+            // Load an assembly reference rather than using a marker type.
+            builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            //configure Auto Mapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿@model List<Car>
+﻿@model List<CarDto>
 
 
 
@@ -10,12 +10,12 @@
 			<div class="card" style="width: 18rem;">
 				<img src="@i.ImageUrl" class="card-img-top">
 				<div class="card-body">
-					<h5 class="card-title">@i.Brand @i.Model</h5>
+					<h5 class="card-title">@i.BrandName @i.Model</h5>
 					<p class="card-text">@i.Description</p>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item">Category: @i.Category</li>
-					<li class="list-group-item">Engine: @i.Engine</li>
+					<li class="list-group-item">Category: @i.CategoryName</li>
+					<li class="list-group-item">Engine: @i.EngineDisplay</li>
 					<li class="list-group-item">Year: @i.Year</li>
 					<li class="list-group-item">
 						@if (i.Discount > 0)

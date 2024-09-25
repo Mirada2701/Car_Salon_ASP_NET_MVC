@@ -1,4 +1,5 @@
-﻿@model Car
+﻿
+@model CarDto
 @{
     var create = ViewBag.CreateMode;
 }
@@ -30,9 +31,11 @@
         <span class="small text-danger" asp-validation-for="Model"></span>
     </div>
     <div class="col-md-6">
-        <label asp-for=Engine class="form-label">Engine</label>
-        <input required asp-for=Engine type="text" class="form-control" placeholder="Enter engine. Example: 2.0 TDI">
-        <span class="small text-danger" asp-validation-for="Engine"></span>
+        <label asp-for=EngineId class="form-label">Engine</label>
+        <select asp-for=EngineId asp-items=@ViewBag.Engines class="form-select">
+            <option disabled selected>Choose car engine</option>
+        </select>
+        <span class="small text-danger" asp-validation-for="EngineId"></span>
     </div>
     <div class="col-12">
         <label asp-for=Year class="form-label">Year</label>
@@ -46,17 +49,17 @@
     </div>
     <div class="col-md-3">
         <label asp-for=Discount class="form-label">Discount</label>
-        <input required asp-for=Discount value="0" type="number" min="0" max="100" class="form-control" placeholder="Enter discount">
+        <input required asp-for=Discount type="number" min="0" max="100" class="form-control" placeholder="Enter discount">
         <span class="small text-danger" asp-validation-for="Discount"></span>
     </div>
     <div class="col-md-3">
         <label asp-for=Quantity class="form-label">Quantity</label>
-        <input required asp-for=Quantity value="0" type="number" min="0" class="form-control" placeholder="Enter quantity">
+        <input required asp-for=Quantity type="number" min="0" class="form-control" placeholder="Enter quantity">
         <span class="small text-danger" asp-validation-for="Quantity"></span>
     </div>
     <div class="col-md-12">
         <label asp-for=ImageUrl class="form-label">Image URL</label>
-        <input asp-for=ImageUrl type="text" class="form-control" placeholder="Enter Image Url">
+        <input asp-for=ImageUrl type="url" class="form-control" placeholder="Enter Image Url">
         <span class="small text-danger" asp-validation-for="ImageUrl"></span>
     </div>
     <div class="form-floating">
@@ -80,3 +83,6 @@
     </div>
 </form>
 
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

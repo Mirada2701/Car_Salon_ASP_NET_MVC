@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Car_Salon_App.Migrations
 {
     [DbContext(typeof(CarSalonDbContext))]
-    [Migration("20240924120725_Init")]
+    [Migration("20240925182518_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -115,8 +115,10 @@ namespace Car_Salon_App.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Engine")
-                        .IsRequired()
+                    b.Property<int>("EngineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
@@ -138,6 +140,8 @@ namespace Car_Salon_App.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("EngineId");
+
                     b.ToTable("Cars");
 
                     b.HasData(
@@ -147,7 +151,8 @@ namespace Car_Salon_App.Migrations
                             BrandId = 1,
                             CategoryId = 1,
                             Discount = 10,
-                            Engine = "2.0 TDI",
+                            EngineId = 1,
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVPmQmyQY3Y5l_OU-xBQ7gGe2TXtKLX5pFPA&s",
                             Model = "Q5",
                             Price = 21000m,
                             Quantity = 5,
@@ -156,10 +161,11 @@ namespace Car_Salon_App.Migrations
                         new
                         {
                             Id = 2,
-                            BrandId = 2,
+                            BrandId = 3,
                             CategoryId = 2,
                             Discount = 5,
-                            Engine = "5.5 T",
+                            EngineId = 15,
+                            ImageUrl = "https://cdn3.riastatic.com/photosnew/auto/photo/mercedes-benz_cls-class__486325818f.jpg",
                             Model = "CLS",
                             Price = 30000m,
                             Quantity = 2,
@@ -168,10 +174,11 @@ namespace Car_Salon_App.Migrations
                         new
                         {
                             Id = 3,
-                            BrandId = 3,
+                            BrandId = 2,
                             CategoryId = 4,
                             Discount = 15,
-                            Engine = "2.5 TDI",
+                            EngineId = 6,
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqzKVeLR9AsFHMTk35UJYKqspSYu8t1NyjCg&s",
                             Model = "525I",
                             Price = 5500m,
                             Quantity = 10,
@@ -223,6 +230,124 @@ namespace Car_Salon_App.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Car_Salon_App.Entities.Engine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Capacity")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Engines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Capacity = 2.0,
+                            Type = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 2.0,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Capacity = 3.0,
+                            Type = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Capacity = 3.0,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Capacity = 5.0,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Capacity = 2.5,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Capacity = 2.5,
+                            Type = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Capacity = 1.3999999999999999,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Capacity = 1.6000000000000001,
+                            Type = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Capacity = 5.0,
+                            Type = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Capacity = 2.2000000000000002,
+                            Type = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Capacity = 2.7000000000000002,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Capacity = 1.8,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Capacity = 1.8999999999999999,
+                            Type = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Capacity = 5.5,
+                            Type = "Petrol"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Capacity = 4.7000000000000002,
+                            Type = "Petrol"
+                        });
+                });
+
             modelBuilder.Entity("Car_Salon_App.Entities.Car", b =>
                 {
                     b.HasOne("Car_Salon_App.Entities.Brand", "Brand")
@@ -237,9 +362,17 @@ namespace Car_Salon_App.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Car_Salon_App.Entities.Engine", "Engine")
+                        .WithMany("Cars")
+                        .HasForeignKey("EngineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Engine");
                 });
 
             modelBuilder.Entity("Car_Salon_App.Entities.Brand", b =>
@@ -248,6 +381,11 @@ namespace Car_Salon_App.Migrations
                 });
 
             modelBuilder.Entity("Car_Salon_App.Entities.Category", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("Car_Salon_App.Entities.Engine", b =>
                 {
                     b.Navigation("Cars");
                 });
