@@ -21,18 +21,23 @@ body {
   margin-bottom: 60px;
 }
 
-.card img{
-    object-fit: contain;
-    margin:4px;
-    width:97%;
-    height:80%;
-    border:6px;
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    padding: 2px;
+    border-radius: 6px;
 }
-
 .car-table img {
     transition: .2s;
 }
 
 .car-table img:hover{
     transform: scale(3);
+}
+
+.car-image {
+    width: 250px;
+    height: auto;
+    max-height: 150px; 
+    object-fit: cover; 
 }

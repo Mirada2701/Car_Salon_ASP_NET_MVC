@@ -1,13 +1,11 @@
 ﻿@model List<CarDto>
 
 
-
-
 <div class="row row-cols-3 g-4">
 	@foreach (var i in Model)
 	{
-		<div class="col">
-			<div class="card" style="width: 18rem;">
+		<div class="col d-flex">
+			<div class="card flex-fill" style="width: 18rem;">
 				<img src="@i.ImageUrl" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">@i.BrandName @i.Model</h5>
@@ -16,7 +14,7 @@
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Category: @i.CategoryName</li>
 					<li class="list-group-item">Engine: @i.EngineDisplay</li>
-					<li class="list-group-item">Year: @i.Year</li>
+					<li class="list-group-item">Year: @i.Year.Year</li>
 					<li class="list-group-item">
 						@if (i.Discount > 0)
 						{
@@ -39,6 +37,9 @@
 						}
 					</li>
 				</ul>
+				<div class="card-body">
+				<a asp-controller="Cart" asp-action="Add" asp-route-id="@i.Id" class="btn btn-primary">Add to Cart</a>
+				</div>
 			</div>
 		</div>
 	}

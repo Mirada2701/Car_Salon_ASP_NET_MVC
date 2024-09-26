@@ -21,7 +21,16 @@ namespace Car_Salon_App
             //configure Auto Mapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            var app = builder.Build();
+			builder.Services.AddDistributedMemoryCache();
+
+			builder.Services.AddSession(options =>
+			{
+				options.IdleTimeout = TimeSpan.FromMinutes(10);
+				options.Cookie.HttpOnly = true;
+				options.Cookie.IsEssential = true;
+			});
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -38,7 +47,9 @@ namespace Car_Salon_App
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
+			app.UseSession();
+
+			app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 

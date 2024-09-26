@@ -1,0 +1,73 @@
+﻿@model List<CarDto>;
+
+<div class="card text-center">
+	<div class="card-header">
+		My Cart
+	</div>
+	@if (!Model.Any())
+	{
+		<p>
+			Your cart is empty
+			<i class="bi bi-emoji-frown"></i>
+		</p>
+		<a asp-controller="Home" asp-action="Index" class="mb-3 btn btn-primary w-20">
+			<i class="bi bi-arrow-90deg-left"></i>
+			Return
+		</a>
+	}
+	else
+	{
+
+		<div class="card-body">
+			<h5 class="card-title">Car List</h5>
+
+			<div class="list-group">
+				@foreach (var i in Model)
+				{
+					<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">@i.BrandName @i.Model</h5>
+							<img class="car-image" src="@i.ImageUrl" />
+							<br />
+							<small class="fw-bold">
+								@if (i.Discount > 0)
+								{
+									<span>
+										<i class="bi bi-tag"></i>
+										@(i.Price - (i.Price / 100 * i.Discount))$
+									</span>
+								}
+								else
+								{
+									<span>
+										<i class="bi bi-tag"></i>@i.Price$
+									</span>
+								}
+							</small>
+							<p class="mb-1">
+								<i class="bi bi-fuel-pump"></i> @i.EngineDisplay <br />
+								<i class="bi bi-calendar-event"></i> @i.Year.Year <br />
+								<i class="bi bi-bezier"></i> @i.CategoryName
+							</p>
+							<small>Glad you choose us!</small>
+							<a asp-action="Remove" asp-route-id="@i.Id" class="btn btn-outline-danger w-5 h-5 d-flex align-items-center">
+								<i class="bi bi-x-circle"></i>
+							</a>
+						</div>
+					</a>
+				}
+			</div>
+
+			<a href="#" class="btn btn-success mt-3">Confirm</a>
+		</div>
+		<div class="card-footer text-body-secondary">
+			@{decimal sum = 0;}
+			@foreach (var i in Model)
+			{
+				sum += i.Price - (i.Price / 100 * i.Discount);
+			}
+			Total: @sum$
+		</div>
+	}
+</div>
+
