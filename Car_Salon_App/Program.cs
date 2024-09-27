@@ -5,6 +5,7 @@ using Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Car_Salon_App
 {
@@ -20,6 +21,8 @@ namespace Car_Salon_App
 
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDbContext<CarSalonDbContext>(opt => opt.UseSqlServer(connectionString));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarSalonDbContext>();
             // configure fluent validators
             builder.Services.AddFluentValidationAutoValidation();
             // enable client-side validation
@@ -39,6 +42,7 @@ namespace Car_Salon_App
 			});
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICarService, CarService>();
+            builder.Services.AddScoped<IHomeService, HomeService>();
 
 			var app = builder.Build();
 
@@ -59,6 +63,7 @@ namespace Car_Salon_App
 
 			app.UseSession();
 
+            app.MapRazorPages();
 			app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

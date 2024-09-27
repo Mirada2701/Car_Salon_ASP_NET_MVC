@@ -11,15 +11,15 @@ namespace Car_Salon_App.Controllers
 {
     public class HomeController : Controller
     {
-        public ICarService carService;
+        public IHomeService homeService;
 
-		public HomeController(ICarService carService)
+		public HomeController(IHomeService homeService)
         {
-			this.carService = carService;
+			this.homeService = homeService;
 		}
         public IActionResult Index()
         {
-			return View(carService.GetCars());
+			return View(homeService.GetCars());
         }
 
         public IActionResult Privacy()

@@ -9,13 +9,11 @@ namespace Car_Salon_App.Services
 {
 	public class CarService : ICarService
 	{
-		private readonly HttpContext httpContext;
 		private readonly IMapper mapper;
 		private readonly CarSalonDbContext context;
 
-		public CarService(IHttpContextAccessor contextAccessor, IMapper mapper, CarSalonDbContext context)
+		public CarService(IMapper mapper, CarSalonDbContext context)
 		{
-			httpContext = contextAccessor.HttpContext!;
 			this.mapper = mapper;
 			this.context = context;
 		}

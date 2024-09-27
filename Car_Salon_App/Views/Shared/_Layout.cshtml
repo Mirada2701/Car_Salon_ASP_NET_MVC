@@ -33,13 +33,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
 							<a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">
-                                <i class="bi bi-cart-fill"></i> (@cartService.GetCount())
+								<i class="bi bi-cart-fill"></i> (@cartService.GetCount())
 							</a>
-                        </li>                        
-                    </ul>
+						</li>
+					</ul>
+					<partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
