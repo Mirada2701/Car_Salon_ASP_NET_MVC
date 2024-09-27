@@ -18,7 +18,10 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url('https://img.freepik.com/free-photo/business-parking-empty-carpark-abstract_1203-5195.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .card-img-top {
@@ -40,4 +43,18 @@ body {
     height: auto;
     max-height: 150px; 
     object-fit: cover; 
+}
+
+.det-img {
+    width: 450px;
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;
+}
+
+.container-xl {
+    background-color: white; /* Білий фон */
+    padding: 20px; /* Додаткові відступи для вмісту */
+    border-radius: 8px; /* Закруглені кути, якщо потрібно */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Додати тінь для ефекту */
 }

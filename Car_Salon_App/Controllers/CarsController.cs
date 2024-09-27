@@ -5,21 +5,26 @@ using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Car_Salon_App.Services;
+using Core.Interfaces;
 
 namespace Car_Salon_App.Controllers
 {
     public class CarsController : Controller
     {
-        private CarSalonDbContext context = new();
-        private readonly IMapper mapper;
-        public CarsController(IMapper mapper)
-        {   
-            this.mapper = mapper;
-        }
-        public IActionResult Index()
+        public ICarService carService;
+
+		public CarsController(ICarService carService)
         {
-            var cars = context.Cars.Include(c => c.Brand).Include(c => c.Category).Include(c => c.Engine).ToList();
-            return View(mapper.Map<List<CarDto>>(cars));
+			this.carService = carService;
+		}
+        public IActionResult Index()
+        {            
+            return View(carService.GetCars());
+        }
+        public IActionResult Details(int id)
+        {
+            return View(carService.GetOne(id));
         }
         public IActionResult Create()
         {
@@ -29,29 +34,22 @@ namespace Car_Salon_App.Controllers
         }
         [HttpPost]
         public IActionResult Create(CarDto car)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.CreateMode = true;
-                SetSelectItems();
-                return View("Upsert",car);
-            }
-            var entity =  mapper.Map<Car>(car);
+		{
+			if (!ModelState.IsValid)
+			{
+				ViewBag.CreateMode = true;
+				SetSelectItems();
+				return View("Upsert", car);
+			}
+			carService.Create(car);
 
-            context.Cars.Add(entity);
-            context.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
+			return RedirectToAction("Index");
+		}
         public IActionResult Edit(int id)
-        {
-            var car = context.Cars.Find(id);
-
-            if (car == null) return NotFound();
-
+        {          
             SetSelectItems();
             ViewBag.CreateMode = false;
-            return View("Upsert",mapper.Map<CarDto>(car));
+            return View("Upsert",carService.Edit(id));
         }
         [HttpPost]
         public IActionResult Edit(CarDto car)
@@ -62,39 +60,25 @@ namespace Car_Salon_App.Controllers
                 ViewBag.CreateMode = true;
                 return View("Upsert",car);
             }
-
-            var entity = mapper.Map<Car>(car);
-
-            context.Cars.Update(entity);
-            context.SaveChanges();
+           
+            carService.Edit(car);
 
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)
-        {
-            var car = context.Cars.Find(id);
-
-            if(car == null) return NotFound(); //404
-            
-            context.Cars.Remove(car);
-            context.SaveChanges();
-
+        {            
+            carService.Delete(id);
             return RedirectToAction("Index");
         }
         public IActionResult Info(int id)
         {
-            var car = context.Cars.Include(c => c.Brand).Include(c => c.Category).Include(c => c.Engine).FirstOrDefault(c => c.Id == id);
-
-            if (car == null)
-                return NotFound();
-            
-            return View(car);
-        }
+			return View(carService.GetOne(id));
+		}
         private void SetSelectItems()
         {
-            ViewBag.Categories = new SelectList(context.Categories.ToList(), "Id", "Name");
-            ViewBag.Brands = new SelectList(context.Brands.ToList(), "Id", "Name");
-            ViewBag.Engines = new SelectList(context.Engines.ToList(), "Id", "Display");
+            ViewBag.Categories = new SelectList(carService.GetCategories(), "Id", "Name");
+            ViewBag.Brands = new SelectList(carService.GetBrands(), "Id", "Name");
+            ViewBag.Engines = new SelectList(carService.GetEngines(), "Id", "Display");
         }
     }
 }

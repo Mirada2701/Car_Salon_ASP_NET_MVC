@@ -9,21 +9,12 @@ namespace Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Engine> Engines { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public CarSalonDbContext()
-        {
-            
-        }
+        public CarSalonDbContext(DbContextOptions options):base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(@"Data Source=LEGION5\SQLEXPRESS;
-                Initial Catalog = CarSalon;
-                Integrated Security=True;
-                Connect Timeout=30;Encrypt=False;
-                Trust Server Certificate=False;
-                Application Intent=ReadWrite;
-                Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=LEGION5\SQLEXPRESS;Initial Catalog = CarSalon;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

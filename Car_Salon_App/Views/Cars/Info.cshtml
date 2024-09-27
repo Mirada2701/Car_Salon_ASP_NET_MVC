@@ -1,18 +1,17 @@
-﻿@using Data.Entities
-@model Car
+﻿@model CarDto
 
-<h1>Info about @Model.Brand @Model.Model</h1>
+<h1>Info about @Model.BrandName @Model.Model</h1>
 
 <div class="card" style="width: 18rem;">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Brand: @Model.Brand</li>
+        <li class="list-group-item">Brand: @Model.BrandName</li>
         <li class="list-group-item">Model: @Model.Model</li>
-        <li class="list-group-item">Engine: @Model.Engine.Display</li>
+        <li class="list-group-item">Engine: @Model.EngineDisplay</li>
         <li class="list-group-item">Year: @Model.Year.Year</li>
         <li class="list-group-item">Price: @Model.Price</li>
         <li class="list-group-item">Discount: @Model.Discount</li>
         <li class="list-group-item">Quantity: @Model.Quantity</li>
-        <li class="list-group-item">Category: @Model.Category</li>
+        <li class="list-group-item">Category: @Model.CategoryName</li>
         <li class="list-group-item">Description: @Model.Description</li>
     </ul>
 </div>

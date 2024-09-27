@@ -5,21 +5,21 @@ using Car_Salon_App.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Core.Interfaces;
 
 namespace Car_Salon_App.Controllers
 {
     public class HomeController : Controller
     {
-		private CarSalonDbContext context = new();
-        private readonly IMapper mapper;
-        public HomeController(IMapper mapper)
+        public ICarService carService;
+
+		public HomeController(ICarService carService)
         {
-            this.mapper = mapper;
-        }
+			this.carService = carService;
+		}
         public IActionResult Index()
         {
-			var cars = context.Cars.Include(c => c.Brand).Include(c => c.Category).Include(c => c.Engine).ToList();
-			return View(mapper.Map<List<CarDto>>(cars));
+			return View(carService.GetCars());
         }
 
         public IActionResult Privacy()

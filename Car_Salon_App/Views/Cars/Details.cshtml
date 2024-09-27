@@ -1,0 +1,32 @@
+﻿@model CarDto
+
+
+<div class="container-xl w-50 mx-auto">
+
+
+	<h1>@Model.BrandName @Model.Model</h1>
+
+	<img class="det-img" src="@Model.ImageUrl" />
+
+	<p class="fs-4 ">
+		Category: @Model.CategoryName <br />
+		Engine: @Model.EngineDisplay <br />
+		Year: @Model.Year.Year <br />
+		Price: @Model.Price$ <br />
+		Quantity: @Model.Quantity <br />
+		Price with discount(@Model.Discount%):
+		@if (Model.Discount > 0)
+		{
+			<span class="">@(Model.Price - (Model.Price / 100 * Model.Discount))$</span>
+		}
+		else
+		{
+			<span>@Model.Price$</span>
+		}
+		<br />
+		Description: @Model.Description
+	</p>
+
+	<a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Cart</a>
+
+</div>

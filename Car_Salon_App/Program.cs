@@ -1,7 +1,10 @@
 using Car_Salon_App.Services;
+using Core.Interfaces;
 using Core.MapperProfiles;
+using Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Car_Salon_App
 {
@@ -10,11 +13,13 @@ namespace Car_Salon_App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            string connectionString = builder.Configuration.GetConnectionString("LocalDb");
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDbContext<CarSalonDbContext>(opt => opt.UseSqlServer(connectionString));
             // configure fluent validators
             builder.Services.AddFluentValidationAutoValidation();
             // enable client-side validation
@@ -33,6 +38,7 @@ namespace Car_Salon_App
 				options.Cookie.IsEssential = true;
 			});
             builder.Services.AddScoped<ICartService, CartService>();
+            builder.Services.AddScoped<ICarService, CarService>();
 
 			var app = builder.Build();
 
