@@ -1,3 +1,4 @@
+using Car_Salon_App.Services;
 using Core.MapperProfiles;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -13,6 +14,7 @@ namespace Car_Salon_App
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddHttpContextAccessor();
             // configure fluent validators
             builder.Services.AddFluentValidationAutoValidation();
             // enable client-side validation
@@ -30,6 +32,7 @@ namespace Car_Salon_App
 				options.Cookie.HttpOnly = true;
 				options.Cookie.IsEssential = true;
 			});
+            builder.Services.AddScoped<ICartService, CartService>();
 
 			var app = builder.Build();
 
