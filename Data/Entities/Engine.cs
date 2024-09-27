@@ -1,4 +1,4 @@
-﻿namespace Car_Salon_App.Entities
+﻿namespace Data.Entities
 {
     public class Engine
     {

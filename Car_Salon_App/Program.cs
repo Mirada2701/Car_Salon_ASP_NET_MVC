@@ -1,3 +1,4 @@
+using Core.MapperProfiles;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
@@ -19,7 +20,7 @@ namespace Car_Salon_App
             // Load an assembly reference rather than using a marker type.
             builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             //configure Auto Mapper
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAutoMapper(typeof(AppProfile));
 
 			builder.Services.AddDistributedMemoryCache();
 

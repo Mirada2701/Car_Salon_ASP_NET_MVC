@@ -1,7 +1,7 @@
-﻿using Car_Salon_App.Entities;
+﻿using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Car_Salon_App.Data
+namespace Data
 {
     public class CarSalonDbContext : DbContext
     {

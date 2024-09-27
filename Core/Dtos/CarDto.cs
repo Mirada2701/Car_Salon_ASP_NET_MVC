@@ -1,6 +1,6 @@
-﻿using Car_Salon_App.Entities;
+﻿using Data.Entities;
 
-namespace Car_Salon_App.Dtos
+namespace Core.Dtos
 {
     public class CarDto
     {

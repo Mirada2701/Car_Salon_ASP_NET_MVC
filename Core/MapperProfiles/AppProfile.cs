@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Car_Salon_App.Dtos;
-using Car_Salon_App.Entities;
+using Core.Dtos;
+using Data.Entities;
 
-namespace Car_Salon_App.MapperProfiles
+namespace Core.MapperProfiles
 {
     public class AppProfile : Profile
     {

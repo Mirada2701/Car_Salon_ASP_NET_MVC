@@ -1,7 +1,7 @@
-﻿using Car_Salon_App.Entities;
+﻿using Data.Entities;
 using FluentValidation;
 
-namespace Car_Salon_App.Validators
+namespace Core.Validators
 {
     public class EngineValidator : AbstractValidator<Engine>
     {

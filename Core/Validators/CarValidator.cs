@@ -1,7 +1,7 @@
-﻿using Car_Salon_App.Dtos;
+﻿using Core.Dtos;
 using FluentValidation;
 
-namespace Car_Salon_App.Validators
+namespace Core.Validators
 {
     public class CarValidator : AbstractValidator<CarDto>
     {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Car_Salon_App.Data;
-using Car_Salon_App.Dtos;
-using Car_Salon_App.Entities;
+using Data;
+using Core.Dtos;
+using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
