@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
-    public class CarSalonDbContext : IdentityDbContext
+    public class CarSalonDbContext : IdentityDbContext<User>
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }

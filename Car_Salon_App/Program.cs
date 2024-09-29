@@ -6,6 +6,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Data.Entities;
 
 namespace Car_Salon_App
 {
@@ -22,7 +23,7 @@ namespace Car_Salon_App
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDbContext<CarSalonDbContext>(opt => opt.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarSalonDbContext>();
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarSalonDbContext>();
             // configure fluent validators
             builder.Services.AddFluentValidationAutoValidation();
             // enable client-side validation
