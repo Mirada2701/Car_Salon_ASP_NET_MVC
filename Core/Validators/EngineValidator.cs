@@ -1,9 +1,10 @@
-﻿using Data.Entities;
+﻿using Core.Dtos;
+using Data.Entities;
 using FluentValidation;
 
 namespace Core.Validators
 {
-    public class EngineValidator : AbstractValidator<Engine>
+    public class EngineValidator : AbstractValidator<EngineDto>
     {
         public EngineValidator() 
         {

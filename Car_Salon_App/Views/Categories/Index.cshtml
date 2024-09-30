@@ -1,0 +1,26 @@
+﻿@model List<CategoryDto>
+
+<h1>Category list</h1>
+
+<a asp-action="Create" class="mb-3 btn btn-primary">
+    <i class="bi bi-plus-circle-fill"></i>
+    Add New Category
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+		@foreach (var c in Model)
+		{
+			<tr>
+				<th scope="row">@c.Id</th>
+				<td>@c.Name</td>
+			</tr>
+		}       
+    </tbody>
+</table>

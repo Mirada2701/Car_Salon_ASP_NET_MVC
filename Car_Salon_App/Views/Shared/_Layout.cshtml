@@ -33,8 +33,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Brands" asp-action="Index">Brands</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Engines" asp-action="Index">Engines</a>
+                        </li>
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a>
+                            </li>
+                        }                       
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">

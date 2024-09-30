@@ -1,9 +1,10 @@
-﻿using Data.Entities;
+﻿using Core.Dtos;
+using Data.Entities;
 using FluentValidation;
 
 namespace Core.Validators
 {
-    public class CategoryValidator : AbstractValidator<Category>
+    public class CategoryValidator : AbstractValidator<CategoryDto>
     {
         public CategoryValidator()
         {

@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(CarSalonDbContext))]
-    partial class CarSalonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240930123721_AddHp")]
+    partial class AddHp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,9 +134,6 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("EngineId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Hp")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -259,6 +259,9 @@ namespace Data.Migrations
                     b.Property<double>("Capacity")
                         .HasColumnType("float");
 
+                    b.Property<int>("HP")
+                        .HasColumnType("int");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -272,96 +275,112 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             Capacity = 2.0,
+                            HP = 0,
                             Type = "Diesel"
                         },
                         new
                         {
                             Id = 2,
                             Capacity = 2.0,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 3,
                             Capacity = 3.0,
+                            HP = 0,
                             Type = "Diesel"
                         },
                         new
                         {
                             Id = 4,
                             Capacity = 3.0,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 5,
                             Capacity = 5.0,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 6,
                             Capacity = 2.5,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 7,
                             Capacity = 2.5,
+                            HP = 0,
                             Type = "Diesel"
                         },
                         new
                         {
                             Id = 8,
                             Capacity = 1.3999999999999999,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 9,
                             Capacity = 1.6000000000000001,
+                            HP = 0,
                             Type = "Diesel"
                         },
                         new
                         {
                             Id = 10,
                             Capacity = 5.0,
+                            HP = 0,
                             Type = "Diesel"
                         },
                         new
                         {
                             Id = 11,
                             Capacity = 2.2000000000000002,
+                            HP = 0,
                             Type = "Diesel"
                         },
                         new
                         {
                             Id = 12,
                             Capacity = 2.7000000000000002,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 13,
                             Capacity = 1.8,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 14,
                             Capacity = 1.8999999999999999,
+                            HP = 0,
                             Type = "Diesel"
                         },
                         new
                         {
                             Id = 15,
                             Capacity = 5.5,
+                            HP = 0,
                             Type = "Petrol"
                         },
                         new
                         {
                             Id = 16,
                             Capacity = 4.7000000000000002,
+                            HP = 0,
                             Type = "Petrol"
                         });
                 });

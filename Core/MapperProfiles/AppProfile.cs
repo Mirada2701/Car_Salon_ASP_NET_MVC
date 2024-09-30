@@ -9,6 +9,9 @@ namespace Core.MapperProfiles
         public AppProfile()
         {
             CreateMap<CarDto, Car>().ReverseMap();
+            CreateMap<CategoryDto, Category>().ReverseMap();
+            CreateMap<BrandDto, Brand>().ReverseMap();
+            CreateMap<EngineDto, Engine>().ReverseMap();
         }
     }
 }

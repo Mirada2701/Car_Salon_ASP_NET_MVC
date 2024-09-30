@@ -31,11 +31,21 @@
         <span class="small text-danger" asp-validation-for="Model"></span>
     </div>
     <div class="col-md-6">
+        <label asp-for=Color class="form-label">Color</label>
+        <input required asp-for=Color type="text" class="form-control" placeholder="Enter Color">
+        <span class="small text-danger" asp-validation-for="Color"></span>
+    </div>
+    <div class="col-md-6">
         <label asp-for=EngineId class="form-label">Engine</label>
         <select asp-for=EngineId asp-items=@ViewBag.Engines class="form-select">
             <option disabled selected>Choose car engine</option>
         </select>
         <span class="small text-danger" asp-validation-for="EngineId"></span>
+    </div>
+    <div class="col-6">
+        <label asp-for=Hp class="form-label">HP</label>
+        <input required asp-for=Hp type="number" class="form-control">
+        <span class="small text-danger" asp-validation-for="Hp"></span>
     </div>
     <div class="col-12">
         <label asp-for=Year class="form-label">Year</label>

@@ -1,41 +1,36 @@
 ﻿using Core.Interfaces;
 using Data;
 using Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Car_Salon_App.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly CarSalonDbContext context;
         private readonly ICartService cartService;
+        private readonly IOrderService orderService;
 
-        private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        private string CurrentUserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
-        public OrdersController(CarSalonDbContext context,ICartService cartService)
+        public OrdersController(CarSalonDbContext context,ICartService cartService,IOrderService orderService)
         {
             this.context = context;
             this.cartService = cartService;
+            this.orderService = orderService;
         }
         public IActionResult Index()
-        {
-            var orders = context.Orders.Include(u => u.User).Where(u => u.UserId == UserId).ToList();
-            return View(orders);
+        {            
+            return View(orderService.GetOrders(CurrentUserId));
         }
+        
         public IActionResult Create()
         {
-            var order = new Order()
-            {
-                CreatedAt = DateTime.Now,
-                UserId = UserId,
-                Cars = cartService.GetCarsEntity()
-            };
-
-            context.Orders.Add(order);
-            context.SaveChanges();
-
+            orderService.Create(CurrentUserId,cartService);
             cartService.Clear();
             return RedirectToAction("Index");
         }

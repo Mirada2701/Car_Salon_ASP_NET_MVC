@@ -3,10 +3,11 @@ using AutoMapper;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Car_Salon_App.Services
 {
-	public class HomeService : IHomeService
+    public class HomeService : IHomeService
 	{
 		private readonly IMapper mapper;
 		private readonly CarSalonDbContext context;

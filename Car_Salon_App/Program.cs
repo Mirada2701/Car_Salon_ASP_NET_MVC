@@ -44,6 +44,10 @@ namespace Car_Salon_App
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IHomeService, HomeService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IBrandService, BrandService>();
+            builder.Services.AddScoped<IEngineService, EngineService>();
 
 			var app = builder.Build();
 

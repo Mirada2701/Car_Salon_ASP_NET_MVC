@@ -1,9 +1,10 @@
-﻿using Data.Entities;
+﻿using Core.Dtos;
+using Data.Entities;
 using FluentValidation;
 
 namespace Core.Validators
 {
-    public class BrandValidator : AbstractValidator<Brand>
+    public class BrandValidator : AbstractValidator<BrandDto>
     {
         public BrandValidator()
         {
