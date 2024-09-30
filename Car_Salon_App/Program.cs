@@ -15,7 +15,7 @@ namespace Car_Salon_App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            string connectionString = builder.Configuration.GetConnectionString("LocalDb");
+            string connectionString = builder.Configuration.GetConnectionString("SomeeComDb")!;
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

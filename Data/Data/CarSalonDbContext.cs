@@ -12,12 +12,12 @@ namespace Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Order> Orders { get; set; }
         public CarSalonDbContext(DbContextOptions options):base(options) { }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(@"Data Source=LEGION5\SQLEXPRESS;Initial Catalog = CarSalon;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-        }
+        //    optionsBuilder.UseSqlServer(@"Data Source=LEGION5\SQLEXPRESS;Initial Catalog = CarSalon;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
