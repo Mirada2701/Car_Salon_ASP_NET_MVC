@@ -10,6 +10,7 @@ namespace Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Engine> Engines { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public CarSalonDbContext(DbContextOptions options):base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

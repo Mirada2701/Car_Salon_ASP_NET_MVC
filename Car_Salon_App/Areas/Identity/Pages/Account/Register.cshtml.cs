@@ -102,6 +102,9 @@ namespace Car_Salon_App.Areas.Identity.Pages.Account
             [DataType(DataType.Date)]
             [Display(Name = "Birthdate")]
             public DateTime? Birthdate { get; set; }
+            [DataType(DataType.PostalCode)]
+            [Display(Name = "Postal code")]
+            public int? PostalCode { get; set; }
         }
 
 
@@ -124,6 +127,7 @@ namespace Car_Salon_App.Areas.Identity.Pages.Account
 
                 //set custom
                 user.Birthdate = Input.Birthdate;
+                user.PostalCode = Input.PostalCode;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

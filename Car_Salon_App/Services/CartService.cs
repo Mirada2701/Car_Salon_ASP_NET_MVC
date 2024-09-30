@@ -5,6 +5,7 @@ using AutoMapper;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
+using Data.Entities;
 
 namespace Car_Salon_App.Services
 {
@@ -28,6 +29,12 @@ namespace Car_Salon_App.Services
             var cars = context.Cars.Include(c => c.Brand).Include(c => c.Category).Include(c => c.Engine).Where(c => ids.Contains(c.Id)).ToList();
 
             return mapper.Map<List<CarDto>>(cars);
+        }
+        public List<Car> GetCarsEntity()
+        {
+            var ids = httpContext.Session.Get<List<int>>("cart_items") ?? new();
+
+            return context.Cars.Include(c => c.Brand).Include(c => c.Category).Include(c => c.Engine).Where(c => ids.Contains(c.Id)).ToList();
         }
         public int GetCount()
 		{
@@ -53,6 +60,11 @@ namespace Car_Salon_App.Services
 
             ids.Remove(id);
             httpContext.Session.Set("cart_items", ids);
+        }
+
+        public void Clear()
+        {
+            httpContext.Session.Remove("cart_items");
         }
     }
 }

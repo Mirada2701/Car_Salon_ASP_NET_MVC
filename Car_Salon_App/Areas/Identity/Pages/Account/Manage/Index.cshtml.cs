@@ -26,6 +26,7 @@ namespace Car_Salon_App.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
         public DateTime? Birthdate { get; set; }
+        public int? PostalCode { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -69,6 +70,7 @@ namespace Car_Salon_App.Areas.Identity.Pages.Account.Manage
 
             Username = userName;
             Birthdate = user.Birthdate;
+            PostalCode = user.PostalCode;
 
             Input = new InputModel
             {
