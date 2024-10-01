@@ -39,8 +39,8 @@
 					</li>
 				</ul>
 				<div class="card-body">
-				<a asp-controller="Cart" asp-action="Add" asp-route-id="@i.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Cart</a>
-				<a asp-controller="Cars" asp-action="Details" asp-route-id="@i.Id" class="btn btn-primary">Show details</a>
+					<a asp-controller="Cart" asp-action="Add" asp-route-id="@i.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-outline-primary"><i class="bi bi-bag-plus-fill"></i></a>
+					<a asp-controller="Cars" asp-action="Details" asp-route-id="@i.Id" class="btn btn-outline-info"><i class="bi bi-info-square-fill"></i></a>
 				</div>
 			</div>
 		</div>

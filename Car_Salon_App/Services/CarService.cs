@@ -26,12 +26,14 @@ namespace Car_Salon_App.Services
 			context.SaveChanges();
 		}
 
-		public void Delete(int id)
+		public void Delete(int id, IFileService fileService)
 		{
 			var car = context.Cars.Find(id);
 
 			if (car == null) return; //404
 
+			if(car.ImageUrl != null)
+				fileService.DeleteProductImage(car.ImageUrl);
 			context.Cars.Remove(car);
 			context.SaveChanges();
 		}

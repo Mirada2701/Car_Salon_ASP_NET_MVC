@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Dtos
 {
@@ -8,6 +9,7 @@ namespace Core.Dtos
         public int BrandId { get; set; }
         public string? BrandName { get; set; }
         public string? ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
         public string? Model { get; set; }
         public int? Hp { get; set; }
         public int EngineId { get; set; }

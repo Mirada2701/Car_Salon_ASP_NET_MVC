@@ -16,7 +16,7 @@ namespace Core.Validators
             RuleFor(x => x.Quantity).GreaterThanOrEqualTo(0);
             RuleFor(x => x.Description).MaximumLength(500);
             RuleFor(x => x.CategoryId).GreaterThan(0).WithMessage("Category is required");
-            RuleFor(x => x.ImageUrl).NotNull().NotEmpty().Must(ValidateUri).WithMessage("Invalid URL");
+            //RuleFor(x => x.ImageUrl).NotNull().NotEmpty().Must(ValidateUri).WithMessage("Invalid URL");
             RuleFor(x => x.Hp).InclusiveBetween(50,2000);
         }
         public bool ValidateUri(string? uri)

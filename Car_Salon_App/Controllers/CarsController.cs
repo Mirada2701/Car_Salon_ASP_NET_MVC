@@ -13,10 +13,12 @@ namespace Car_Salon_App.Controllers
     public class CarsController : Controller
     {
         public ICarService carService;
+		private readonly IFileService fileService;
 
-		public CarsController(ICarService carService)
+		public CarsController(ICarService carService,IFileService fileService)
         {
 			this.carService = carService;
+			this.fileService = fileService;
 		}
         public IActionResult Index()
         {            
@@ -33,7 +35,7 @@ namespace Car_Salon_App.Controllers
             return View("Upsert");
         }
         [HttpPost]
-        public IActionResult Create(CarDto car)
+        public async Task<IActionResult> Create(CarDto car)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -41,6 +43,9 @@ namespace Car_Salon_App.Controllers
 				SetSelectItems();
 				return View("Upsert", car);
 			}
+            if (car.Image != null)
+                car.ImageUrl = await fileService.SaveProductImage(car.Image);
+
 			carService.Create(car);
 
 			return RedirectToAction("Index");
@@ -66,8 +71,8 @@ namespace Car_Salon_App.Controllers
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)
-        {            
-            carService.Delete(id);
+        {         
+            carService.Delete(id,fileService);
             return RedirectToAction("Index");
         }
         public IActionResult Info(int id)

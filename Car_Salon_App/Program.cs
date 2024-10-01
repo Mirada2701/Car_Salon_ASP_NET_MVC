@@ -7,6 +7,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Data.Entities;
+using Core.Services;
 
 namespace Car_Salon_App
 {
@@ -48,6 +49,7 @@ namespace Car_Salon_App
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IBrandService, BrandService>();
             builder.Services.AddScoped<IEngineService, EngineService>();
+            builder.Services.AddScoped<IFileService, FileService>();
 
 			var app = builder.Build();
 
