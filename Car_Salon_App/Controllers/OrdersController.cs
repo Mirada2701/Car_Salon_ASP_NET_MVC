@@ -1,4 +1,5 @@
 ﻿using Core.Interfaces;
+using Core.Models;
 using Data;
 using Data.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -16,16 +17,18 @@ namespace Car_Salon_App.Controllers
         private readonly ICartService cartService;
         private readonly IOrderService orderService;
         private readonly IEmailSender emailSender;
+        private readonly IViewRender viewRender;
 
         private string CurrentUserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
         private string CurrentUserEmail => User.FindFirstValue(ClaimTypes.Email)!;
 
-        public OrdersController(CarSalonDbContext context,ICartService cartService,IOrderService orderService,IEmailSender emailSender)
+        public OrdersController(CarSalonDbContext context,ICartService cartService,IOrderService orderService,IEmailSender emailSender,IViewRender viewRender)
         {
             this.context = context;
             this.cartService = cartService;
             this.orderService = orderService;
             this.emailSender = emailSender;
+            this.viewRender = viewRender;
         }
         public IActionResult Index()
         {            
@@ -37,8 +40,17 @@ namespace Car_Salon_App.Controllers
             var order = orderService.Create(CurrentUserId,cartService);
 
             //send email of order to the client
-            var totalPrice = order.Cars.Sum(x => x.Price);
-            await emailSender.SendEmailAsync(CurrentUserEmail, $"New Order #{order.Id}", $"<p>Total Price : {totalPrice}$</p>");
+            var totalPrice = order.Cars!.Sum(x => x.Price);
+
+            var html = viewRender.Render("MailTemplates/OrderSummary", new OrderSummaryModel
+            {
+                OrderNumber = order.Id,
+                UserName = CurrentUserEmail,
+                Cars = cartService.GetCars(),
+                TotalPrice = totalPrice
+            });
+
+            await emailSender.SendEmailAsync(CurrentUserEmail, $"New Order #{order.Id}",html);
 
             cartService.Clear();
             return RedirectToAction("Index");

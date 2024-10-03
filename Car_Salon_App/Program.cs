@@ -58,6 +58,7 @@ namespace Car_Salon_App
             builder.Services.AddScoped<IEngineService, EngineService>();
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IViewRender, ViewRender>();
 
             var app = builder.Build();
 
