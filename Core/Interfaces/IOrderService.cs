@@ -10,6 +10,6 @@ namespace Core.Interfaces
 	public interface IOrderService
     {
         List<Order> GetOrders(string id);
-        void Create(string id, ICartService cartService);
+        Order Create(string id, ICartService cartService);
     }
 }

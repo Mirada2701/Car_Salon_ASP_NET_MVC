@@ -13,7 +13,7 @@ namespace Car_Salon_App.Services
         {
             this.context = context;
         }
-        public void Create(string id, ICartService cartService)
+        public Order Create(string id, ICartService cartService)
         {
             var order = new Order()
             {
@@ -24,6 +24,7 @@ namespace Car_Salon_App.Services
 
             context.Orders.Add(order);
             context.SaveChanges();
+            return order;
         }
 
         public List<Order> GetOrders(string CurrentUserId)

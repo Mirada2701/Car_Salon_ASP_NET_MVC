@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Data.Entities;
 using Core.Services;
 using Car_Salon_App.Extensions;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Car_Salon_App
 {
@@ -56,8 +57,9 @@ namespace Car_Salon_App
             builder.Services.AddScoped<IBrandService, BrandService>();
             builder.Services.AddScoped<IEngineService, EngineService>();
             builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())
             {
