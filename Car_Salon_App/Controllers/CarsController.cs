@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Car_Salon_App.Services;
 using Core.Interfaces;
+using Car_Salon_App.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Car_Salon_App.Controllers
 {
+    [Authorize(Roles = Roles.ADMIN)]
     public class CarsController : Controller
     {
         public ICarService carService;

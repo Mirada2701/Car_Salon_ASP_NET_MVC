@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Data.Entities;
 using Core.Services;
+using Car_Salon_App.Extensions;
 
 namespace Car_Salon_App
 {
@@ -24,7 +25,12 @@ namespace Car_Salon_App
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDbContext<CarSalonDbContext>(opt => opt.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarSalonDbContext>();
+
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+             options.SignIn.RequireConfirmedAccount = false)
+             .AddDefaultUI()
+             .AddDefaultTokenProviders()
+             .AddEntityFrameworkStores<CarSalonDbContext>();
             // configure fluent validators
             builder.Services.AddFluentValidationAutoValidation();
             // enable client-side validation
@@ -52,6 +58,12 @@ namespace Car_Salon_App
             builder.Services.AddScoped<IFileService, FileService>();
 
 			var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                scope.ServiceProvider.SeedRoles().Wait();
+                scope.ServiceProvider.SeedAdmin().Wait();
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

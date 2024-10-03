@@ -1,11 +1,14 @@
-﻿using Car_Salon_App.Services;
+﻿using Car_Salon_App.Extensions;
+using Car_Salon_App.Services;
 using Core.Dtos;
 using Core.Interfaces;
 using Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Car_Salon_App.Controllers
 {
+    [Authorize(Roles = Roles.ADMIN)]
     public class EnginesController : Controller
     {
         private readonly IEngineService engineService;
