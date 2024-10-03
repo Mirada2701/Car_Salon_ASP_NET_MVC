@@ -24,10 +24,11 @@ namespace Core.Services
 			if (File.Exists(fullPath))
 				File.Delete(fullPath);
 		}
-		public Task<string> EditProductImage(string oldPath, IFormFile newFile)
+		public async Task<string> EditProductImage(string oldPath, IFormFile newFile)
 		{
-			throw new NotImplementedException();
-		}
+            DeleteProductImage(oldPath);
+            return await SaveProductImage(newFile);
+        }
 		public async Task<string> SaveProductImage(IFormFile file)
 		{
 			// get image destination path

@@ -57,7 +57,7 @@ namespace Car_Salon_App.Controllers
             return View("Upsert",carService.Edit(id));
         }
         [HttpPost]
-        public IActionResult Edit(CarDto car)
+        public async Task<IActionResult> Edit(CarDto car)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +65,9 @@ namespace Car_Salon_App.Controllers
                 ViewBag.CreateMode = true;
                 return View("Upsert",car);
             }
-           
+            if (car.Image != null)
+                car.ImageUrl = await fileService.EditProductImage(car.ImageUrl, car.Image);
+
             carService.Edit(car);
 
             return RedirectToAction("Index");
